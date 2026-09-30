@@ -2,15 +2,15 @@
 #include <WiFiClientSecure.h>
 #include <UniversalTelegramBot.h>
 
-// ————————— 1. بيانات الاتصال والتليجرام —————————
-const char* ssid = "";      // اكتب اسم شبكة الواي فاي الخاصة بك
-const char* pass = "";     // اكتب كلمة مرور الشبكة
-const char* BOT_TOKEN = "";       // ضع توكن البوت المسحوب من BotFather
-const char* CHAT_ID = "";       // ضع رقم CHAT_ID للمجموعة (مع علامة السالب -)
+// ————————— 1. WiFi & Telegram Credentials —————————
+const char* ssid = "";      // Enter your WiFi network SSID
+const char* pass = "";     // Enter your WiFi network password
+const char* BOT_TOKEN = "";       // Enter your Telegram bot token from BotFather
+const char* CHAT_ID = "";       // Enter your group/user CHAT_ID (include minus sign '-' if applicable)
 
-// ————————— 2. تعريف المنافذ (Pins) —————————
-const int LEAK_SENSOR = D5; // منفذ إشارة حساس التسرب
-const int BUZZER = D6;      // منفذ الطنان الصوتي
+// ————————— 2. Pin Definitions —————————
+const int LEAK_SENSOR = D5; // Leak sensor signal pin
+const int BUZZER = D6;      // Active buzzer pin
 
 bool alertActive = false;
 WiFiClientSecure client;
@@ -23,9 +23,9 @@ void setup() {
   pinMode(BUZZER, OUTPUT);
   digitalWrite(BUZZER, LOW);
 
-  // الاتصال بشبكة الواي فاي
+  // Connect to WiFi
   WiFi.begin(ssid, pass);
-  client.setInsecure(); // لتجاوز فحص شهادات الأمان SSL لتليجرام
+  client.setInsecure(); // Skip SSL certificate validation for Telegram
 
   Serial.print("Connecting to WiFi...");
   while (WiFi.status() != WL_CONNECTED) {
@@ -34,7 +34,7 @@ void setup() {
   }
   Serial.println("\nWiFi Connected!");
 
-  // إرسال رسالة تأكيد عند تشغيل النظام
+  // Send startup confirmation message
   String startupMsg = "نظام كشف تسرب المياه من السقف جاهز للعمل.";
   bot.sendMessage(CHAT_ID, startupMsg, "");
 }
@@ -42,7 +42,7 @@ void setup() {
 void loop() {
   int sensorRead = digitalRead(LEAK_SENSOR);
 
-  // عند اكتشاف الماء (الحالة HIGH)
+  // When water is detected (HIGH state)
   if (sensorRead == HIGH) {
     if (!alertActive) {
       String alertMsg = "⚠️ تنبيه خطر: تم اكتشاف تسرب مياه من السقف!";
@@ -50,13 +50,13 @@ void loop() {
       alertActive = true;
     }
     
-    // إطلاق صوت إنذار متقطع
+    // Trigger intermittent buzzer alarm
     digitalWrite(BUZZER, HIGH);
     delay(200);
     digitalWrite(BUZZER, LOW);
     delay(200);
   } else {
-    // عند جفاف الحساس وعودة الوضع للطبيعي
+    // When sensor dries up and system returns to normal
     if (alertActive) {
       String safeMsg = "تحديث: توقف اكتشاف المياه، الوضع عاد للطبيعي.";
       bot.sendMessage(CHAT_ID, safeMsg, "");
