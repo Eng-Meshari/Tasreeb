@@ -1,69 +1,47 @@
-# Prerequisites
-*.d
+# ==========================================
+# Secrets & Credentials
+# ==========================================
+secrets.h
+config.h
+credentials.h
+.env
+*.env
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# ==========================================
+# PlatformIO
+# ==========================================
+.pio/
+.pioenvs/
+.piolibdeps/
+.clang-format
+platformio.ini.local
 
-# Precompiled Headers
-*.gch
-*.pch
-
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-*.so.*
-
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-# Build directories
+# ==========================================
+# Arduino IDE
+# ==========================================
+*.hex
+*.elf
+*.bin
 build/
-Build/
-build-*/
+applet/
 
-# CMake generated files
-CMakeFiles/
-CMakeCache.txt
-cmake_install.cmake
-Makefile
-install_manifest.txt
-compile_commands.json
-
-# Temporary files
-*.tmp
-*.log
-*.bak
+# ==========================================
+# Editors & IDEs
+# ==========================================
+.vscode/
+!.vscode/extensions.json
+.idea/
 *.swp
+*.swo
+*~
 
-# vcpkg
-vcpkg_installed/
-
-# debug information files
-*.dwo
-
-# test output & cache
-Testing/
-.cache/
+# ==========================================
+# OS Generated Files
+# ==========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
