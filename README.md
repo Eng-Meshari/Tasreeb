@@ -787,11 +787,6 @@ SOFTWARE.
 ---
 
 <div align="center">
-
-**Built with 💧 and C++ by [Eng-Meshari](https://github.com/Eng-Meshari)**
-
-If this project helped you catch a leak before it caught you, consider leaving a ⭐
-
-[Report a Bug](https://github.com/Eng-Meshari/Tasreeb/issues) · [Request a Feature](https://github.com/Eng-Meshari/Tasreeb/issues) · [View Source](https://github.com/Eng-Meshari/Tasreeb)
+[Report a Bug](https://github.com/Eng-Meshari/Tasreeb/issues)
 
 </div>
